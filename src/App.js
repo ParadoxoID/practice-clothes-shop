@@ -1,9 +1,14 @@
-import React from 'react'
+import React from 'react';
+import HomePage from './pages/homepage/HomePage';
+
+import './App.css';
 
 const App = () => {
   return (
-    <div>App</div>
-  )
-}
+    <div>
+      <HomePage />
+    </div>
+  );
+};
 
-export default App
+export default App;
