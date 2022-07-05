@@ -31,7 +31,6 @@ const App = () => {
 
     return () => unsubscribeFromAuth.current();
   }, []);
-  console.log(currentUser);
 
   return (
     <div>
