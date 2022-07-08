@@ -3,3 +3,4 @@
 # React Router Dom V6
 # SASS/SCSS
 # Firebase
+# Redux/React-Redux/Redux-logger
