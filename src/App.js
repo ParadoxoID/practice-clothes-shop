@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
-import { useDispatch } from 'react-redux/es/exports';
-import { Routes, Route } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux/es/exports';
+import { Routes, Route, Navigate, useNavigate } from 'react-router-dom';
 import { onSnapshot } from 'firebase/firestore';
 
 import HomePage from './pages/HomePage/HomePage';
@@ -15,6 +15,8 @@ import './App.css';
 
 const App = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { currentUser } = useSelector(state => state.user);
   const unsubscribeFromAuth = useRef(null);
 
   useEffect(() => {
@@ -23,7 +25,7 @@ const App = () => {
         const userRef = await createUserProfileDocument(userAuth);
 
         onSnapshot(userRef, snapShot => {
-          dispatch(setCurrentUser({ id: snapShot.id, ...snapShot.data() }))
+          dispatch(setCurrentUser({ id: snapShot.id, ...snapShot.data() }));
         });
       } else {
         dispatch(setCurrentUser(userAuth));
@@ -39,7 +41,10 @@ const App = () => {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/shop" element={<ShopPage />} />
-        <Route path="/signin" element={<SignInAndSignUpPage />} />
+        <Route
+          path="/signin"
+          element={currentUser ? <Navigate to="/" replace /> : <SignInAndSignUpPage />}
+        />
       </Routes>
     </div>
   );
