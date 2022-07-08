@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
-import { useDispatch, useSelector } from 'react-redux/es/exports';
-import { Routes, Route, Navigate, useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import { onSnapshot } from 'firebase/firestore';
 
 import HomePage from './pages/HomePage/HomePage';
@@ -15,7 +15,6 @@ import './App.css';
 
 const App = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const { currentUser } = useSelector(state => state.user);
   const unsubscribeFromAuth = useRef(null);
 
