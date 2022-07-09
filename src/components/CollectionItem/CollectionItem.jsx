@@ -1,19 +1,32 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
+import { addItem } from '../../redux/cart/cartActions';
+import Button from '../Button/Button';
 import './CollectionItem.scss';
 
-const CollectionItem = ({ id, name, price, imageUrl }) => (
-  <div className="collection-item">
-    <div
-      className="image"
-      style={{
-        backgroundImage: `url(${imageUrl})`
-      }}
-    />
-    <div className="collection-footer">
-      <span className="name">{name}</span>
-      <span className="price">${price}</span>
+const CollectionItem = ({ item }) => {
+  const { imageUrl, name, price } = item;
+  const dispatch = useDispatch();
+
+  const addCartHandler = () => dispatch(addItem(item));
+
+  return (
+    <div className="collection-item">
+      <div
+        className="image"
+        style={{
+          backgroundImage: `url(${imageUrl})`
+        }}
+      />
+      <div className="collection-footer">
+        <span className="name">{name}</span>
+        <span className="price">${price}</span>
+      </div>
+      <Button onClick={addCartHandler} inverted>
+        Add to cart
+      </Button>
     </div>
-  </div>
-);
+  );
+};
 
 export default CollectionItem;
