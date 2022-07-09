@@ -1,14 +1,14 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import Button from '../Button/Button';
 import { addItem } from '../../redux/cart/cartActions';
+import Button from '../Button/Button';
 import './CollectionItem.scss';
 
 const CollectionItem = ({ item }) => {
   const { imageUrl, name, price } = item;
   const dispatch = useDispatch();
 
-  const addCartHandler = () => dispatch(addItem({ item }));
+  const addCartHandler = () => dispatch(addItem(item));
 
   return (
     <div className="collection-item">
