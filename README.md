@@ -4,3 +4,5 @@
 # SASS/SCSS
 # Firebase
 # Redux/React-Redux/Redux-logger
+# Reselect
+# Redux-Persist
