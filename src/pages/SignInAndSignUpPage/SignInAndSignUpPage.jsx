@@ -1,6 +1,8 @@
 import React from 'react';
+
 import SignIn from '../../components/SignIn/SignIn';
 import SignUp from '../../components/SignUp/SignUp';
+
 import './SignInAndSignUpPage.scss';
 
 const SignInAndSignUpPage = () => {
@@ -9,7 +11,7 @@ const SignInAndSignUpPage = () => {
       <SignIn />
       <SignUp />
     </div>
-  )
-}
+  );
+};
 
-export default SignInAndSignUpPage
+export default SignInAndSignUpPage;

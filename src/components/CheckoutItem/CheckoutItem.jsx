@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { useDispatch } from 'react-redux';
 import { clearItemFromCart, addItem, removeItem } from '../../redux/cart/cartActions';
 
 import './CheckoutItem.scss';
 
-const CheckoutItem = ({ cartItem }) => {
+const CheckoutItem = memo(({ cartItem }) => {
   const { name, imageUrl, price, quantity } = cartItem;
   const dispatch = useDispatch();
 
@@ -40,6 +40,6 @@ const CheckoutItem = ({ cartItem }) => {
       </div>
     </div>
   );
-};
+});
 
 export default CheckoutItem;

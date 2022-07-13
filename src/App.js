@@ -3,17 +3,17 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { onSnapshot } from 'firebase/firestore';
 
+import { auth, createUserProfileDocument } from './firebase/firebase.utils';
+
+import { setCurrentUser } from './redux/user/userActions';
+import { selectCurrentUser } from './redux/user/userSelectors';
+
 import HomePage from './pages/HomePage/HomePage';
 import ShopPage from './pages/ShopPage/ShopPage';
 import CheckoutPage from './pages/CheckoutPage/CheckoutPage';
 import SignInAndSignUpPage from './pages/SignInAndSignUpPage/SignInAndSignUpPage';
 
 import Header from './components/Header/Header';
-
-import { auth, createUserProfileDocument } from './firebase/firebase.utils';
-
-import { setCurrentUser } from './redux/user/userActions';
-import { selectCurrentUser } from './redux/user/userSelectors';
 
 import './App.css';
 

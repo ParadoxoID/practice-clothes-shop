@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
 
 import FormInput from '../FormInput/FormInput';
 import Button from '../Button/Button';
@@ -6,7 +7,6 @@ import Button from '../Button/Button';
 import { auth, createUserProfileDocument } from '../../firebase/firebase.utils';
 
 import './SignUp.scss';
-import { createUserWithEmailAndPassword } from 'firebase/auth';
 
 const SignUp = () => {
   const [state, setState] = useState({

@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
+import { signInWithEmailAndPassword } from 'firebase/auth';
+
+import { auth, signInWithGoogle } from '../../firebase/firebase.utils';
+
 import Button from '../Button/Button';
 import FormInput from '../FormInput/FormInput';
-import { auth, signInWithGoogle } from '../../firebase/firebase.utils';
+
 import './SignIn.scss';
-import { signInWithEmailAndPassword } from 'firebase/auth';
 
 const SignIn = () => {
   const [email, setEmail] = useState('');
