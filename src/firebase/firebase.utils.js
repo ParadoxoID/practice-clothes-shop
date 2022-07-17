@@ -1,6 +1,7 @@
 import { initializeApp } from 'firebase/app';
 import { doc, getDoc, getFirestore, setDoc } from 'firebase/firestore/lite';
 import { getAuth, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
+import { collection, writeBatch } from 'firebase/firestore';
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -16,10 +17,15 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
 
+// firestore === db
+// Разные источники обзывают их по разному.
+export const db = getFirestore(app);
+
 export const createUserProfileDocument = async (userAuth, additionalData) => {
   if (!userAuth) return;
 
   const userRef = doc(db, `users/${userAuth.uid}`);
+
   const snapShot = await getDoc(userRef);
 
   if (!snapShot.exists()) {
@@ -41,9 +47,18 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
   return userRef;
 };
 
-// firestore === db
-// Разные источники обзывают их по разному.
-export const db = getFirestore(app);
+export const addCollectionAndDocuments = async (collectionKey, objectsToAdd) => {
+  const collectionRef = collection(db, collectionKey);
+  console.log('collectionRef', collectionRef);
+
+  const batch = writeBatch(db);
+  objectsToAdd.forEach(obj => {
+    const newDocRef = doc(collectionRef);
+    batch.set(newDocRef, obj);
+  });
+
+  return await batch.commit();
+};
 
 const provider = new GoogleAuthProvider();
 provider.setCustomParameters({ prompt: 'select_account' });

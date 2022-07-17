@@ -20,8 +20,6 @@ import {
   OptionLink
 } from './Header.styles';
 
-// import './Header.scss';
-
 const Header = () => {
   const structuredSelector = createStructuredSelector({
     hidden: selectCartHidden,
