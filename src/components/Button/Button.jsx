@@ -1,9 +1,13 @@
 import React from 'react';
+import './Button.scss';
 
-import { CustomButtonContainer } from './Button.styles';
+// Убрал для styled-components так как делал это только для теста
+// import { CustomButtonContainer } from './Button.styles';
 
 const Button = ({ children, ...props }) => (
-  <CustomButtonContainer {...props}>{children}</CustomButtonContainer>
+  <button className="custom-button" {...props}>
+    {children}
+  </button>
 );
 
 export default Button;
