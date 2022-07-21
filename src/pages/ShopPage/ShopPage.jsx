@@ -1,10 +1,10 @@
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { collection, onSnapshot } from 'firebase/firestore';
-import { updateCollections } from '../../redux/shop/shopActions';
+import { useDispatch, useSelector } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
 
-import { db, convertCollectionsSnapshotToMap } from '../../firebase/firebase.utils';
+import { fetchCollectionsStartAsync } from '../../redux/shop/shopActions';
+import { selectIsCollectionFetching } from '../../redux/shop/shopSelectors';
 
 import SpinnerHoc from '../../components/SpinnerHoc/SpinnerHoc';
 import CollectionsOverview from '../../components/CollectionsOverview/CollectionsOverview';
@@ -14,27 +14,23 @@ const CollectionOverviewWithSpinner = SpinnerHoc(CollectionsOverview);
 const CollectionPageWithSpinner = SpinnerHoc(CollectionPage);
 
 const ShopPage = () => {
-  const unsubscribeFromSubscribe = useRef(null);
-  const [loading, setLoading] = useState(true);
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    const collectionRef = collection(db, 'collections');
+  const { isFetching } = useSelector(
+    createStructuredSelector({ isFetching: selectIsCollectionFetching })
+  );
 
-    unsubscribeFromSubscribe.current = onSnapshot(collectionRef, async snapshot => {
-      const collectionsMap = convertCollectionsSnapshotToMap(snapshot);
-      dispatch(updateCollections(collectionsMap));
-      setLoading(false);
-    });
+  useEffect(() => {
+    dispatch(fetchCollectionsStartAsync());
   }, []);
 
   return (
     <div className="shop-page">
       <Routes>
-        <Route index element={<CollectionOverviewWithSpinner isLoading={loading} />} />
+        <Route index element={<CollectionOverviewWithSpinner isLoading={isFetching} />} />
         <Route
           path={`:collectionId`}
-          element={<CollectionPageWithSpinner isLoading={loading} />}
+          element={<CollectionPageWithSpinner isLoading={isFetching} />}
         />
       </Routes>
     </div>

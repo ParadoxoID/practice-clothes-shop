@@ -4,8 +4,12 @@ import './Button.scss';
 // Убрал для styled-components так как делал это только для теста
 // import { CustomButtonContainer } from './Button.styles';
 
-const Button = ({ children, ...props }) => (
-  <button className="custom-button" {...props}>
+const Button = ({ children, isGoogleButton, inverted, ...props }) => (
+  <button
+    className={`${inverted ? 'inverted' : ''} ${
+      isGoogleButton ? 'google-sign-in' : ''
+    } custom-button`}
+    {...props}>
     {children}
   </button>
 );
