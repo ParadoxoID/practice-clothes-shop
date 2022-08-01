@@ -1,6 +1,10 @@
 import React, { memo } from 'react';
 import { useDispatch } from 'react-redux';
-import { clearItemFromCart, addItem, removeItem } from '../../redux/cart/cartActions';
+import {
+  clearItemFromCart,
+  addItem,
+  removeItem
+} from '../../redux/cart/cartActions';
 
 import './CheckoutItem.scss';
 

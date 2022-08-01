@@ -3,11 +3,11 @@ import { Routes, Route } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
-import { fetchCollectionsStartAsync } from '../../redux/shop/shopActions';
 import {
-  selectIsCollectionFetching,
+  selectIsCollectionsFetching,
   selectIsCollectionsLoaded
 } from '../../redux/shop/shopSelectors';
+import { fetchCollectionsStart } from './../../redux/shop/shopActions';
 
 import SpinnerHoc from '../../components/SpinnerHoc/SpinnerHoc';
 import CollectionsOverview from '../../components/CollectionsOverview/CollectionsOverview';
@@ -21,13 +21,13 @@ const ShopPage = () => {
 
   const { isFetching, isCollectionsLoaded } = useSelector(
     createStructuredSelector({
-      isFetching: selectIsCollectionFetching,
+      isFetching: selectIsCollectionsFetching,
       isCollectionsLoaded: selectIsCollectionsLoaded
     })
   );
 
   useEffect(() => {
-    dispatch(fetchCollectionsStartAsync());
+    dispatch(fetchCollectionsStart());
   }, []);
 
   return (
@@ -39,7 +39,9 @@ const ShopPage = () => {
         />
         <Route
           path={`:collectionId`}
-          element={<CollectionPageWithSpinner isLoading={!isCollectionsLoaded} />}
+          element={
+            <CollectionPageWithSpinner isLoading={!isCollectionsLoaded} />
+          }
         />
       </Routes>
     </div>

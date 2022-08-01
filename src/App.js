@@ -47,7 +47,9 @@ const App = () => {
         <Route path="/checkout" element={<CheckoutPage />} />
         <Route
           path="/signin"
-          element={currentUser ? <Navigate to="/" replace /> : <SignInAndSignUpPage />}
+          element={
+            currentUser ? <Navigate to="/" replace /> : <SignInAndSignUpPage />
+          }
         />
       </Routes>
     </div>

@@ -2,7 +2,10 @@ import React from 'react';
 import { createStructuredSelector } from 'reselect';
 import { useSelector } from 'react-redux';
 
-import { selectCartItems, selectCartTotal } from './../../redux/cart/cartSelectors';
+import {
+  selectCartItems,
+  selectCartTotal
+} from './../../redux/cart/cartSelectors';
 
 import CheckoutItem from '../../components/CheckoutItem/CheckoutItem';
 
@@ -10,7 +13,10 @@ import './CheckoutPage.scss';
 
 const CheckoutPage = () => {
   const { cartItems, total } = useSelector(
-    createStructuredSelector({ cartItems: selectCartItems, total: selectCartTotal })
+    createStructuredSelector({
+      cartItems: selectCartItems,
+      total: selectCartTotal
+    })
   );
 
   return (
